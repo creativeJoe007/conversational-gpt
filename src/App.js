@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { FloatButton } from "antd";
+import { QuestionCircleOutlined } from "@ant-design/icons";
+import ChatInterface from "./ChatInterface";
+
+import "./App.css";
 
 function App() {
+  const [isChatOpen, setChatOpen] = React.useState(false);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      {!isChatOpen ? (
+        <FloatButton
+          icon={<QuestionCircleOutlined />}
+          description="Do you need help?"
+          shape="square"
+          type="default"
+          style={{ right: 40, bottom: 100, width: 150, padding: ".5rem .5rem", borderColor: "rgb(2, 71, 49)" }}
+          onClick={() => setChatOpen(true)}
         >
-          Learn React
-        </a>
-      </header>
+        </FloatButton>
+      ) : (
+        <ChatInterface closeHandler={setChatOpen}/>
+      )}
     </div>
   );
 }
